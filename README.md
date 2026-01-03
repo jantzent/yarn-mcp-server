@@ -6,7 +6,8 @@ Set environment variables before starting the service:
 
 - `YARN_RM_URL` (required): ResourceManager base URL, e.g. `https://rm.example.com:8088`.
 - `YARN_AHS_URL` (optional): Application History Server base URL. If unset, AHS tools are disabled.
-- `YARN_AUTH_MODE`: Auth mode placeholder (e.g. `none`, `basic`, `kerberos`).
+- `YARN_AUTH_MODE`: Auth mode (`none` or `kerberos`).
+- `YARN_KERBEROS_SERVICE`: Kerberos service name for SPNEGO (default: `HTTP`).
 - `YARN_TLS_VERIFY`: `true`/`false` to control TLS verification (default: `true`).
 - `YARN_TIMEOUT`: Request timeout in seconds (default: `10`).
 

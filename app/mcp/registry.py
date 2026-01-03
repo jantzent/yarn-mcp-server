@@ -2,6 +2,7 @@ from typing import Any, Callable, Dict
 
 from fastmcp import FastMCP
 
+from app.auth import build_auth
 from app.clients.history_server import HistoryServerClient
 from app.clients.resource_manager import ResourceManagerClient
 from app.config import AppConfig
@@ -24,12 +25,14 @@ class ToolRegistry:
 
 def build_registry(config: AppConfig) -> ToolRegistry:
     registry = ToolRegistry()
+    auth = build_auth(config)
 
     rm_client = ResourceManagerClient(
         config.rm_url,
         timeout=config.timeout,
         tls_verify=config.tls_verify,
         retries=config.retries,
+        auth=auth,
     )
     rm_handler = ResourceManagerHandler(rm_client)
 
@@ -49,6 +52,7 @@ def build_registry(config: AppConfig) -> ToolRegistry:
             timeout=config.timeout,
             tls_verify=config.tls_verify,
             retries=config.retries,
+            auth=auth,
         )
         ahs_handler = HistoryServerHandler(ahs_client)
 
