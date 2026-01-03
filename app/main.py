@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastmcp import FastMCP
 
 from app.config import AppConfig, load_config
@@ -28,8 +28,8 @@ async def mcp_manifest() -> dict:
 
 
 @app.get("/mcp/tools")
-async def mcp_tools() -> dict[str, list[str]]:
-    registry: ToolRegistry = app.state.registry
+async def mcp_tools(request: Request) -> dict[str, list[str]]:
+    registry: ToolRegistry = request.app.state.registry
     return {"tools": sorted(registry.tools().keys())}
 
 
