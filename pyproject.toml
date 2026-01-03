@@ -1,0 +1,15 @@
+[project]
+name = "yarn-mcp-server"
+version = "0.1.0"
+description = "MCP server for Apache YARN"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastmcp<3",
+    "fastapi>=0.109",
+    "httpx>=0.24",
+    "pydantic>=2.0",
+]
+
+[tool.uv]
+package = true
