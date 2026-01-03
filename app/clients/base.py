@@ -6,12 +6,21 @@ from app.models import MCPError
 
 
 class BaseClient:
-    def __init__(self, base_url: str, *, timeout: float, tls_verify: bool, retries: int) -> None:
+    def __init__(
+        self,
+        base_url: str,
+        *,
+        timeout: float,
+        tls_verify: bool,
+        retries: int,
+        auth: Optional[httpx.Auth] = None,
+    ) -> None:
         self._client = httpx.AsyncClient(
             base_url=base_url,
             timeout=httpx.Timeout(timeout),
             verify=tls_verify,
             transport=httpx.AsyncHTTPTransport(retries=retries),
+            auth=auth,
         )
 
     async def close(self) -> None:
