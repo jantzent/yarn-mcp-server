@@ -8,6 +8,12 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 COPY pyproject.toml README.md /app/
 COPY app /app/app
 
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        libkrb5-3 \
+        libkrb5-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN pip install --no-cache-dir .
 
 EXPOSE 8080
