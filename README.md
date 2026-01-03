@@ -19,6 +19,24 @@ uv venv
 uv pip install -e .
 ```
 
+## Docker
+Build the image:
+
+```bash
+docker build -t yarn-mcp-server .
+```
+
+Run the server (pass configuration via env vars):
+
+```bash
+docker run --rm -p 8080:8080 \
+  -e YARN_RM_URL=https://rm.example.com:8088 \
+  -e YARN_AHS_URL=https://ahs.example.com:8188 \
+  -e YARN_AUTH_MODE=kerberos \
+  -e YARN_TLS_VERIFY=true \
+  yarn-mcp-server
+```
+
 ## FastMCP
 The server uses the FastMCP framework to expose MCP tools. Dependencies are pinned to `fastmcp<3` to avoid upcoming breaking changes.
 
